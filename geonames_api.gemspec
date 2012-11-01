@@ -11,7 +11,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Simple ruby client for the GeoNames API to get free and easy geographic info.}
   gem.summary       = %q{This is a lightweight client for the GeoNames API. Huge thanks to them for such a great service! There are many GeoNames API clients. BUT, most are rewritten versions of a Java API whose interface is a little funny =| This is a simplified ruby implementation that does not implement the entire API. But, its lightweight and has a nice interface and will be easy to extend :)}
   gem.homepage      = "https://github.com/buytruckload/geonames_api"
-  gem.add_dependency = "activesupport"
+  gem.add_dependancy = "activesupport"
   gem.files         = `git ls-files`.split($/)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
