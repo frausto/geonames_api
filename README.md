@@ -73,7 +73,12 @@ The geonames api uses the ISO code of the country as its natural key.
     
     => ... array of GeoNamesAPI::Country instances
     
-There are no additional methods offered for countries.
+The [postal code exports](http://download.geonames.org/export/zip/) are also available for each country either in string of ruby CSV form.
+
+    # String
+    > GeoNamesAPI::Country.find("US").postal_code_export
+    # CSV::Table
+    > GeoNamesAPI::Country.find("US").postal_code_csv
 
 ### Weather
 
