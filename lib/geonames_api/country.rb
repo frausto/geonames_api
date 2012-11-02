@@ -20,7 +20,7 @@ module GeoNamesAPI
     end
     
     def postal_code_csv
-      CSV.parse(postal_code_export, headers: true, col_sep: "\t", header_converters: :symbol)
+      CSV.parse(postal_code_export, headers: true, col_sep: "\t", header_converters: :symbol, encoding: "ISO8859-1")
     end
     
     def postal_code_export_url
