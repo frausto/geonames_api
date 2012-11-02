@@ -1,35 +1,20 @@
 module GeoNamesAPI
-  class Weather
+  class Weather < GeoNamesAPI::Object
+    
     METHOD = "findNearByWeatherJSON"
+    ID = ["lat", "lng"]
     
-    attr_accessor :latitude, :longitude
-    
-    def initialize(latitude, longitude)
-      self.latitude, self.longitude = latitude, longitude
+    def self.where(params={})
+      JSON.load(open(url(params)).read)["weatherObservation"]
     end
     
-    def find
-      parse(JSON.load(open(url).read)["weatherObservation"])
-      self
-    end
-    
-    def parse(response)
-      response.each do |key, value|
-        attr_name = key.underscore.to_sym
-        self.class.send(:attr_accessor, attr_name) unless respond_to? attr_name
-        value = GeoNamesAPI.set_default_type(value)
-        send("#{attr_name}=", value)
-      end 
-      self
-    end
-    
-    def params
-      GeoNamesAPI.params.merge({ lat: latitude, lng: longitude })
-    end
-        
-    def url
-      GeoNamesAPI::BASE_URL + METHOD + GeoNamesAPI.to_url_params(params)
+    def self.url(params)
+      GeoNamesAPI.url + METHOD + GeoNamesAPI.params.merge(params).to_url
     end
 
+    def initialize(response)
+      parse(response)
+    end
+    
   end
 end

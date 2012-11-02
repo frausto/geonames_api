@@ -45,7 +45,7 @@ For a complete list of the config options, take a look at the `geonames_api.rb` 
 
 The geonames api uses the ISO code of the country as its natural key. 
 
-    > GeoNamesAPI::Country.new("US").find
+    > GeoNamesAPI::Country.find("US")
     
     => #<GeoNamesAPI::Country:0x007fd43503dfc0 @country_code="US", @country_name="United States", @currency_code="USD", @fips_code="US", @iso_numeric=840, @north=49.388611, @capital="Washington", @continent_name="North America", @area_in_sq_km=9629091.0, @languages="en-US,es-US,haw,fr", @iso_alpha3="USA", @continent="NA", @south=24.544245, @east=-66.954811, @geoname_id=6252001, @west=-124.733253, @population=310232863>
 
@@ -57,7 +57,7 @@ The geonames api uses the ISO code of the country as its natural key.
 
 The geonames api uses the latitude and longitude of the place as the parameters for its weather service.
 
-    > GeoNamesAPI::Weather.new(41.88,-87.68).find
+    > GeoNamesAPI::Weather.find(41.88,-87.68)
     
     => #<GeoNamesAPI::Weather:0x007fab1c80dc10 @latitude=41.88, @longitude=-87.68, @weather_condition="n/a", @clouds="few clouds", @observation="KMDW 012051Z 28009KT 10SM FEW049 BKN070 11/M02 A2983 RMK AO2 SLP105 T01111022 55010", @wind_direction=280, @icao="KMDW", @sea_level_pressure=1010.5, @elevation=188, @country_code="US", @clouds_code="FEW", @lng=-87.75, @temperature=11.1, @dew_point="-2.2", @wind_speed=9, @humidity=39, @station_name="Chicago, Chicago Midway Airport", @datetime="2012-11-01 20:51:00", @lat=41.78333333333333>
 
