@@ -26,11 +26,11 @@ module GeoNamesAPI
     end
     
     def elevation_feet
-      elevation * 3.28084
+      elevation * 3.28084 if elevation
     end
     
     def elevation_meters
-      elevation
+      elevation if elevation
     end
         
     def convert_c_to_f(temp)
@@ -38,19 +38,19 @@ module GeoNamesAPI
     end
 
     def temperature_f
-      convert_c_to_f(temperature)
+      convert_c_to_f(temperature) if temperature
     end
     
     def temperature_c
-      temperature
+      temperature if temperature
     end
     
     def dew_point_f
-      convert_c_to_f(dew_point)
+      convert_c_to_f(dew_point) if temperature
     end
     
     def dew_point_c
-      dew_point
+      dew_point if temperature
     end
     
   end
