@@ -4,16 +4,53 @@ module GeoNamesAPI
     METHOD = "findNearByWeatherJSON"
     ID = ["lat", "lng"]
     
-    def self.where(params={})
-      JSON.load(open(url(params)).read)["weatherObservation"]
+    def geo_names_api_country
+      @geo_names_api_country ||= GeoNamesAPI::Country.find(country_code)
     end
     
-    def self.url(params)
-      GeoNamesAPI.url + METHOD + GeoNamesAPI.params.merge(params).to_url
+    def geo_names_api_time_zone
+      @geo_names_api_time_zone ||= GeoNamesAPI::TimeZone.find(lat, lng)
+    end
+    
+    def time_zone
+      geo_names_api_time_zone.time_zone
+    end
+        
+    def at_local
+      t = DateTime.parse(datetime)
+      time_zone.local(t.year, t.month, t.day, t.hour, t.minute)
+    end
+    
+    def at_utc
+      at_local.utc
+    end
+    
+    def elevation_feet
+      elevation * 3.28084
+    end
+    
+    def elevation_meters
+      elevation
+    end
+        
+    def convert_c_to_f(temp)
+      temp * 9.to_f / 5.to_f + 32
     end
 
-    def initialize(response)
-      parse(response)
+    def temperature_f
+      convert_c_to_f(temperature)
+    end
+    
+    def temperature_c
+      temperature
+    end
+    
+    def dew_point_f
+      convert_c_to_f(dew_point)
+    end
+    
+    def dew_point_c
+      dew_point
     end
     
   end

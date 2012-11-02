@@ -3,9 +3,12 @@ require 'json'
 require 'active_support/all'
 require "geonames_api/version"
 require "geonames_api/hash"
+require "geonames_api/error"
 require "geonames_api/object"
 require "geonames_api/country"
 require "geonames_api/weather"
+require "geonames_api/time_zone"
+require "geonames_api/wikipedia"
 
 module GeoNamesAPI
   
@@ -27,6 +30,5 @@ module GeoNamesAPI
   def self.params
     { formatted: formatted, lang: lang, username: username, style: style }
   end
-  
-  
+    
 end
