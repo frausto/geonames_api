@@ -4,7 +4,6 @@ require 'csv'
 require 'active_support/all'
 require 'zipruby'
 require "geonames_api/version"
-require "geonames_api/hash"
 require "geonames_api/error"
 require "geonames_api/object"
 require "geonames_api/country"

@@ -1,5 +1,7 @@
 module GeoNamesAPI
   class NearbyPostalCode < GeoNamesAPI::Object
+
+    #radius in km
     METHOD = "findNearbyPostalCodesJSON"
     ID = ["postalcode", "country", "radius", "maxRows"]
 
