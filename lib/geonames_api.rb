@@ -12,6 +12,7 @@ require "geonames_api/weather"
 require "geonames_api/time_zone"
 require "geonames_api/wikipedia"
 require "geonames_api/postal_code"
+require "geonames_api/nearby_postal_code"
 
 module GeoNamesAPI
   
