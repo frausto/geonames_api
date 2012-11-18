@@ -3,17 +3,12 @@ require 'json'
 require 'csv'
 require 'active_support/all'
 require 'zipruby'
+
 require "geonames_api/version"
 require "geonames_api/error"
 require "geonames_api/object"
-require "geonames_api/country"
-require "geonames_api/weather"
-require "geonames_api/time_zone"
-require "geonames_api/wikipedia"
-require "geonames_api/postal_code"
-require "geonames_api/nearby_postal_code"
-require "geonames_api/elevation"
-require "geonames_api/children"
+
+Dir[File.dirname(__FILE__) + '/geonames_api/*.rb'].each {|file| require file }
 
 module GeoNamesAPI
   
