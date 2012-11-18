@@ -13,6 +13,7 @@ require "geonames_api/wikipedia"
 require "geonames_api/postal_code"
 require "geonames_api/nearby_postal_code"
 require "geonames_api/elevation"
+require "geonames_api/children"
 
 module GeoNamesAPI
   
