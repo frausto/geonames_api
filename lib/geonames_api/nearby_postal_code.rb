@@ -11,7 +11,7 @@ module GeoNamesAPI
         'lng' => lng, 
         'radius' => radius, 
         'maxRows' => maxRows
-      }).collect { |response| new(response) if response }.compact
+      }).collect { |response| PostalCode.new(response) if response }.compact
     end
   end
 end
