@@ -37,7 +37,7 @@ module GeoNamesAPI
         if names.any?
           [self::ID].flatten.each { |i| params[i] = names[n]; n+= 1 }
         end
-        params
+        params.delete_if{ |k, v| v.blank? }
       end
     end
 
