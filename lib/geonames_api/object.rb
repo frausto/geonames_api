@@ -16,6 +16,7 @@ module GeoNamesAPI
       
       def where(params={})
         response = JSON.load(open(url(params)).read)
+        GeoNamesAPI.logger.info "GEONAMES RESPONSE (#{Time.now}): #{response}" if GeoNamesAPI.logger
         case response.keys.first
         when /\Astatus\Z/
           message = response["status"]["message"]
@@ -29,7 +30,9 @@ module GeoNamesAPI
       end
       
       def url(params={})
-        GeoNamesAPI.url + self::METHOD + params_to_url(GeoNamesAPI.params.merge(params))
+        endpoint = GeoNamesAPI.url + self::METHOD + params_to_url(GeoNamesAPI.params.merge(params))
+        GeoNamesAPI.logger.info "GEONAMES REQUEST (#{Time.now}): #{endpoint}" if GeoNamesAPI.logger
+        endpoint
       end
       
       def name_params(names)

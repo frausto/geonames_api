@@ -26,6 +26,9 @@ module GeoNamesAPI
   
   mattr_accessor :style
   @@style = :full
+
+  mattr_accessor :logger
+  @@logger = nil
   
   def self.params
     { formatted: formatted, lang: lang, username: username, style: style }

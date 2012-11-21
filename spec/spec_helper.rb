@@ -7,4 +7,5 @@ RSpec.configure do |config|
   puts "Enter your GeonamesAPI username for running functional specs (press enter to just use default)"
   name = $stdin.gets.chomp
   GeoNamesAPI.username = name if name.present?
+  GeoNamesAPI.logger = Logger.new("test.log")
 end
