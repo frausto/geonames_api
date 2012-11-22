@@ -1,5 +1,5 @@
 module GeoNamesAPI
-  class GeoLocation
+  class GeoPlace
     attr_accessor :geonameId
 
     def initialize(geonameId)

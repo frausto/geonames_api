@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe GeoNamesAPI::LocationPoint do
+describe GeoNamesAPI::GeoPoint do
 
-  let(:point) { GeoNamesAPI::LocationPoint.new("37.451","-122.18") }  
+  let(:point) { GeoNamesAPI::GeoPoint.new("37.451","-122.18") }  
 
   {
     'postalcodes' => GeoNamesAPI::Endpoint::NearbyPostalCode,

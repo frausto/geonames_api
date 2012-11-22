@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe GeoNamesAPI::GeoLocation do
+describe GeoNamesAPI::GeoPlace do
 
-  let(:point) { GeoNamesAPI::GeoLocation.new(2593110) }  
+  let(:point) { GeoNamesAPI::GeoPlace.new(2593110) }  
 
   {
     'children' => GeoNamesAPI::Endpoint::Children,

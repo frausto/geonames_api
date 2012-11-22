@@ -1,5 +1,5 @@
 module GeoNamesAPI
-  class LocationBox
+  class GeoBox
     attr_accessor :north, :south, :east, :west
 
     def initialize(north, south, east, west)

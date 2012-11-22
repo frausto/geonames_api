@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe GeoNamesAPI::LocationBox do
+describe GeoNamesAPI::GeoBox do
 
-  let(:point) { GeoNamesAPI::LocationBox.new(44.1,-9.9,-22.4,55.2) }  
+  let(:point) { GeoNamesAPI::GeoBox.new(44.1,-9.9,-22.4,55.2) }  
 
   {
     'earthquakes' => GeoNamesAPI::Endpoint::Earthquake,

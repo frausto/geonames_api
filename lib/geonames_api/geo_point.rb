@@ -1,5 +1,5 @@
 module GeoNamesAPI
-  class LocationPoint
+  class GeoPoint
     attr_accessor :lat, :lng, :country_code_abbr
 
     def initialize(lat, lng)

@@ -48,16 +48,16 @@ module GeoNamesAPI
       parse(response)
     end
 
-    def location_point
-      LocationPoint.new(lat,lng) rescue nil
+    def geo_point
+      GeoPoint.new(lat,lng) rescue nil
     end
 
-    def location_box
-      LocationBox.new(north,south,east,west) rescue nil
+    def geo_box
+      GeoBox.new(north,south,east,west) rescue nil
     end
 
-    def geo_location
-      GeoLocation.new(geoname_id) rescue nil
+    def geo_place
+      GeoPlace.new(geoname_id) rescue nil
     end
 
     def parse(response)
