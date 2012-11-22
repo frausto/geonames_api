@@ -49,8 +49,15 @@ module GeoNamesAPI
     end
 
     def location_point
-      return nil unless lat && lng
-      LocationPoint.new(lat,lng)
+      LocationPoint.new(lat,lng) rescue nil
+    end
+
+    def location_box
+      LocationBox.new(north,south,east,west) rescue nil
+    end
+
+    def geo_location
+      GeoLocation.new(geoname_id) rescue nil
     end
 
     def parse(response)
