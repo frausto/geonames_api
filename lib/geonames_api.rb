@@ -4,11 +4,8 @@ require 'csv'
 require 'active_support/all'
 require 'zipruby'
 
-require "geonames_api/version"
-require "geonames_api/error"
-require "geonames_api/object"
-
 Dir[File.dirname(__FILE__) + '/geonames_api/*.rb'].each {|file| require file }
+Dir[File.dirname(__FILE__) + '/geonames_api/endpoint/*.rb'].each {|file| require file }
 
 module GeoNamesAPI
   

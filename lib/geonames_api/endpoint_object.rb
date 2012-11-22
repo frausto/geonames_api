@@ -1,5 +1,5 @@
 module GeoNamesAPI
-  class Object
+  class EndpointObject
     
     NESTED = true
 
@@ -46,7 +46,12 @@ module GeoNamesAPI
 
     def initialize(response)
       parse(response)
-    end 
+    end
+
+    def location_point
+      return nil unless lat && lng
+      LocationPoint.new(lat,lng)
+    end
 
     def parse(response)
       response.each do |key, value|
