@@ -1,17 +1,17 @@
 module GeoNamesAPI
   class GeoPlace
-    attr_accessor :geonameId
+    attr_accessor :geoname_id
 
-    def initialize(geonameId)
-      @geonameId = geonameId
+    def initialize(geoname_id)
+      @geoname_id = geoname_id
     end
 
     def children
-      Endpoint::Children.find(geonameId)
+      Endpoint::Children.find(geoname_id)
     end
 
     def hierarchy
-      Endpoint::Hierarchy.find(geonameId)
+      Endpoint::Hierarchy.find(geoname_id)
     end
   end
 end
