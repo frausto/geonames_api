@@ -3,15 +3,12 @@ require 'json'
 require 'csv'
 require 'active_support/all'
 require 'zipruby'
+
 require "geonames_api/version"
 require "geonames_api/error"
 require "geonames_api/object"
-require "geonames_api/country"
-require "geonames_api/weather"
-require "geonames_api/time_zone"
-require "geonames_api/wikipedia"
-require "geonames_api/postal_code"
-require "geonames_api/nearby_postal_code"
+
+Dir[File.dirname(__FILE__) + '/geonames_api/*.rb'].each {|file| require file }
 
 module GeoNamesAPI
   
@@ -29,6 +26,9 @@ module GeoNamesAPI
   
   mattr_accessor :style
   @@style = :full
+
+  mattr_accessor :logger
+  @@logger = nil
   
   def self.params
     { formatted: formatted, lang: lang, username: username, style: style }
