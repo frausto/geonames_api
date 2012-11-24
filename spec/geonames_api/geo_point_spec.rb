@@ -5,7 +5,7 @@ describe GeoNamesAPI::GeoPoint do
   let(:point) { GeoNamesAPI::GeoPoint.new("37.451","-122.18") }  
 
   {
-    'postalcodes' => GeoNamesAPI::Endpoint::NearbyPostalCode,
+    'postalcodes' => GeoNamesAPI::Endpoint::PostalCode,
     'country_subdivisions' => GeoNamesAPI::Endpoint::CountrySubdivision,
     'places' => GeoNamesAPI::Endpoint::Place,
     'place_names' => GeoNamesAPI::Endpoint::PlaceName,

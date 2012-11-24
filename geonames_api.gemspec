@@ -13,6 +13,7 @@ Gem::Specification.new do |gem|
   gem.homepage      = "https://github.com/buytruckload/geonames_api"
   
   gem.add_runtime_dependency "activesupport"
+  gem.add_runtime_dependency "tzinfo"
   gem.add_runtime_dependency "zipruby"
   gem.add_development_dependency(%q<rspec>, ["~> 2.12.0"])
   
