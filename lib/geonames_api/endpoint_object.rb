@@ -30,7 +30,7 @@ module GeoNamesAPI
       end
       
       def url(params={})
-        endpoint = GeoNamesAPI.url + self::METHOD + params_to_url(GeoNamesAPI.params.merge(params))
+        endpoint = URI.escape(GeoNamesAPI.url + self::METHOD + params_to_url(GeoNamesAPI.params.merge(params)))
         GeoNamesAPI.logger.info "GEONAMES REQUEST (#{Time.now}): #{endpoint}" if GeoNamesAPI.logger
         endpoint
       end

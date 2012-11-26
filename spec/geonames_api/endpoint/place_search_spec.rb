@@ -16,6 +16,11 @@ describe GeoNamesAPI::Endpoint::PlaceSearch do
       search.total_results_count.should > 0
       search.results.each{|place| place.name.should =~ /ohio/i }
     end
+
+    it "escapes URI properly" do
+      search = GeoNamesAPI::Endpoint::PlaceSearch.find_by_place_name("new york, new york", "10")
+      search.total_results_count.should > 0
+    end
   end
 
   describe "::find_by_exact_place_name" do
