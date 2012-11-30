@@ -85,7 +85,7 @@ Parameters : north,south,east,west : coordinates of bounding box
     > earthquakes:  returns type GeoNamesAPI::Endpoint::Earthquake
     > cities:       returns type GeoNamesAPI::Endpoint::City
 
-## GeoPlace
+### GeoPlace
 
 A place with a geonameId
   > GeoNamesAPI::GeoPoint.new(geonameId)
