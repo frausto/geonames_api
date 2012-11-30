@@ -99,7 +99,13 @@ A place with a geonameId
 
 ## Endpoints
 
-These are the objects that hit the geoNames endpoints to get data.
+These are the objects that hit the geoNames endpoints to get data. All endpoint objects have the methods:
+
+    > geo_point
+    > geo_box
+    > geo_place
+
+which will return the specified location object if the data exists (in the response from the service) to create such an object, otherwise it will return nil
 
 ### PlaceSearch
 
