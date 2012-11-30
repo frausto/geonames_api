@@ -38,6 +38,13 @@ module GeoNamesAPI
         self.class.custom_find(find_params)
       end
 
+      def previous_page
+        return nil if find_params['startRow'] == 0
+        find_params['startRow'] = find_params['startRow'].to_i
+        find_params['startRow'] -= find_params['maxRows'].to_i
+        self.class.custom_find(find_params)
+      end
+
       def to_page(page_number)
         find_params['startRow'] = find_params['maxRows'].to_i * (page_number.to_i - 1)
         self.class.custom_find(find_params)

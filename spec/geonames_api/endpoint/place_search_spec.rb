@@ -39,6 +39,25 @@ describe GeoNamesAPI::Endpoint::PlaceSearch do
       search2.results.last.geoname_id.should == search3[1].geoname_id
       search2.next_page.results.first.geoname_id.should == search3[2].geoname_id
     end
+
+    it "returns nil if already on last page" do
+      search3 = GeoNamesAPI::Endpoint::PlaceSearch.find_by_exact_place_name("new york", "1")
+      search3.to_page(search3.total_results_count)
+      search3.next_page.should == nil
+    end
+  end
+
+  describe "#previous_page" do
+    it "should grab the previous page of results from the same search" do
+      search10 = GeoNamesAPI::Endpoint::PlaceSearch.find("columbus", "10").results
+      search2 = GeoNamesAPI::Endpoint::PlaceSearch.find("columbus", "2")
+      search2.to_page(4).previous_page.results.first.geoname_id.should == search10[4].geoname_id
+    end
+
+    it "returns nil if already on first page" do
+      search2 = GeoNamesAPI::Endpoint::PlaceSearch.find("columbus", "2")
+      search2.previous_page.should == nil
+    end
   end
 
   describe "#to_page" do

@@ -131,7 +131,8 @@ The GeoNamesAPI search. you can see more details at http://www.geonames.org/expo
 
     > results:              returns list of results
     > total_results_count:  returns the total number of results
-    > next_page:            returns PlaceSearch of the next page of results
+    > next_page:            returns PlaceSearch of the next page of results, returns nil if at last page already
+    > previous_page:        returns PlaceSearch of the previous page of results, returns nil if at first page already
     > to_page(page_number): returns the specified page
 
 ### Country
