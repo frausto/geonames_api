@@ -39,17 +39,108 @@ There are some extra methods in most of the key classes. Documentation is includ
 The gem is setup to use the `demo` user account by default. You'll need to provide your own credentials for anything but a simple set of test searches.
 
     > GeoNamesAPI.username = "yourusername@yourdomain.com"
+
     > GeoNamesAPI.lang = :en
-    
-For a complete list of the config options, take a look at the `geonames_api.rb` file.
+
+    > GeoNamesAPI.formatted = true
+
+    > GeoNamesAPI.url = "http://api.geonames.org/"
+      the base url
+
+    > GeoNamesAPI.style = :full
+      values can be (:short ,:medium, :long, :full) depending on how much data you want back
+
+    > GeoNamesAPI.logger = Logger.new("blah.log")
+      logger must respond to :info. By default there is no logging.
+
+## LocationObjects
+
+### GeoPoint
+A point with "lat" "long" coordinates.
+  > GeoNamesAPI::GeoPoint.new(lat,long)
+  > ex: GeoNamesAPI::GeoPoint.new("37.451","-122.18")
+
+  The following instance methods are available:
+
+    > postalcodes:          returns type GeoNamesAPI::Endpoint::PostalCode
+    > country_subdivisions: returns type GeoNamesAPI::Endpoint::CountrySubdivision
+    > places:               returns type GeoNamesAPI::Endpoint::Place
+    > place_names:          returns type GeoNamesAPI::Endpoint::PlaceName
+    > streets:              returns type GeoNamesAPI::Endpoint::Street
+    > elevation:            returns type GeoNamesAPI::Endpoint::Elevation
+    > timezone:             returns type GeoNamesAPI::Endpoint::TimeZone
+    > weather:              returns type GeoNamesAPI::Endpoint::Weather
+    > wiki:                 returns type GeoNamesAPI::Endpoint::Wikipedia
+    > country_code:         returns type GeoNamesAPI::Endpoint::CountryCode
+    > country:              returns type GeoNamesAPI::Endpoint::Country
+
+### GeoBox
+
+Parameters : north,south,east,west : coordinates of bounding box
+  > GeoNamesAPI::GeoBox.new(north,south,east,west)
+  > ex: GeoNamesAPI::GeoBox.new(44.1,-9.9,-22.4,55.2)
+
+  The following instance methods are available:
+
+    > earthquakes:  returns type GeoNamesAPI::Endpoint::Earthquake
+    > cities:       returns type GeoNamesAPI::Endpoint::City
+
+## GeoPlace
+
+A place with a geonameId
+  > GeoNamesAPI::GeoPoint.new(geonameId)
+  > ex: GeoNamesAPI::GeoPoint.new(2593110)
+
+  The following instance methods are available:
+
+    > children:   returns type GeoNamesAPI::Endpoint::Children
+    > hierarchy:  returns type GeoNamesAPI::Endpoint::Hierarchy
+
+
+## Endpoints
+
+These are the objects that hit the geoNames endpoints to get data.
+
+### PlaceSearch
+
+The GeoNamesAPI search. you can see more details at http://www.geonames.org/export/geonames-search.html
+  
+  Examples:
+
+    FIND:
+    > searches all data about a place
+    > GeoNamesAPI::Endpoint::PlaceSearch.find(q, maxRows)
+    > weather = GeoNamesAPI::Endpoint::PlaceSearch.find("ohio corn", "10")
+
+    FIND_BY_PLACE_NAME:
+    > searches only on the name of a place
+    > GeoNamesAPI::Endpoint::PlaceSearch.find_by_place_name(name, maxRows)
+    > GeoNamesAPI::Endpoint::PlaceSearch.find_by_place_name("ohio", "10")
+
+    FIND_BY_EXACT_PLACE_NAME
+    > returns only places that exactly match the name
+    > GeoNamesAPI::Endpoint::PlaceSearch.find_by_exact_place_name(name, maxRows)
+    > GeoNamesAPI::Endpoint::PlaceSearch.find_by_exact_place_name("columbus", "10")
+
+    CUSTOM_FIND
+    > lets you format your own customized search using options seen on http://www.geonames.org/export/geonames-search.html
+    > GeoNamesAPI::Endpoint::PlaceSearch.custom_find(options)
+    > GeoNamesAPI::Endpoint::PlaceSearch.custom_find({name_equals: "columbus", maxRows: "10"})
+
+  Instance Methods:
+
+    > results:              returns list of results
+    > total_results_count:  returns the total number of results
+    > next_page:            returns PlaceSearch of the next page of results
+    > to_page(page_number): returns the specified page
 
 ### Country
 
 The geonames api uses the ISO code of the country as its natural key. 
 
-    > GeoNamesAPI::Country.find("US")
+    > GeoNamesAPI::Endpoint::Country.find("US")
     
-    => #<GeoNamesAPI::Country:0x007fd43503dfc0
+    => #<GeoNamesAPI::Endpoint::Country:0x007fd43503dfc0
           @country_code="US",
           @country_name="United States",
           @currency_code="USD",
@@ -84,9 +175,9 @@ The [postal code exports](http://download.geonames.org/export/zip/) are also ava
 
 The GeoNamesAPI uses the latitude and longitude of the place as the parameters for its weather service.
 
-    > weather = GeoNamesAPI::Weather.find(41.88,-87.68)
+    > weather = GeoNamesAPI::Endpoint::Weather.find(41.88,-87.68)
     
-    => #<GeoNamesAPI::Weather:0x007fab1c80dc10
+    => #<GeoNamesAPI::Endpoint::Weather:0x007fab1c80dc10
           @latitude=41.88,
           @longitude=-87.68,
           @weather_condition="n/a",
@@ -129,7 +220,7 @@ The GeoNamesAPI uses the latitude and longitude of the place as the parameters f
 
     > time_zone = GeoNamesAPI::TimeZone.find(41.88,-87.68)
     
-    => #<GeoNamesAPI::TimeZone:0x007fd4b24d7e00
+    => #<GeoNamesAPI::Endpoint::TimeZone:0x007fd4b24d7e00
           @time="2012-11-02 12:04",
           @country_name="United States",
           @sunset="2012-11-02 17:42",
@@ -143,7 +234,7 @@ The GeoNamesAPI uses the latitude and longitude of the place as the parameters f
           @lat=41.88
         >
 
-    # ActiveSupport::TimeZone instance
+    # ActiveSupport::Endpoint::TimeZone instance
     > time_zone.time_zone
     # Local and UTC version of each time
     > time_zone.sunset_local
@@ -157,9 +248,9 @@ The GeoNamesAPI uses the latitude and longitude of the place as the parameters f
 
 The GeoNamesAPI uses the latitude and longitude of the place as the parameters for its Wikipedia artical service.
 
-Please note the use of the `all` method with `GeoNamesAPI::Wikipedia`. It returns all of the articles that match. The `find` method will return the first matching article.
+Please note the use of the `all` method with `GeoNamesAPI::Endpoint::Wikipedia`. It returns all of the articles that match. The `find` method will return the first matching article.
 
-    > articles = GeoNamesAPI::Wikipedia.all(41.88,-87.68)
+    > articles = GeoNamesAPI::Endpoint::Wikipedia.all(41.88,-87.68)
     => [#<GeoNamesAPI::Wikipedia:0x007fd4b24e6040
             @summary="Richard T. Crane Technical Preparatory High School, commonly known as Crane Tech Prep or Crane Tech High School, is a public high school in Chicago, Illinois. It is located at 2245 West Jackson Boulevard in Chicago's Near West Side community area.  (...)",
             @distance=0.4108,
